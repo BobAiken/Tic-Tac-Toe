@@ -4,33 +4,54 @@ class Game{
         this.player2 = player2
         this.gameBoard = ["","","","","","","","",""]
         this.turn = "player1"
+        this.startingPlayer = "player1"
     }
-    checkForWin(player){
-        if (this.gameBoard[0] === this.player.token && this.gameBoard[1] === this.player.token && this.gameBoard[2] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[3] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[5] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[6] === this.player.token && this.gameBoard[7] === this.player.token && this.gameBoard[8] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[0] === this.player.token && this.gameBoard[3] === this.player.token && this.gameBoard[6] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[1] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[7] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[2] === this.player.token && this.gameBoard[5] === this.player.token && this.gameBoard[8] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[2] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[6] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[0] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[8] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
+    checkForWin(){
+        if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[1] === this[this.turn].token && this.gameBoard[2] === this[this.turn].token ||
+             this.gameBoard[3] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token ||
+              this.gameBoard[6] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
+               this.gameBoard[0] === this[this.turn].token && this.gameBoard[3] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
+                this.gameBoard[1] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token ||
+                 this.gameBoard[2] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
+                  this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
+                   this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
+            this[this.turn].increaseWins()
+            banner.innerText = `${this[this.turn].token} has won!`
+            return true
         }
+        // if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[1] === this[this.turn].token && this.gameBoard[2] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // } else if (this.gameBoard[3] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // } else if (this.gameBoard[6] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // } else if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[3] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // } else if (this.gameBoard[1] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // } else if (this.gameBoard[2] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // } else if (this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // } else if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token){
+        //     this[this.turn].increaseWins()
+        //     banner.innerText = `${this[this.turn].token} has won!`
+        //     return true
+        // }
     }
     checkForDraw(){
         for (var i = 0;i<this.gameBoard.length;i++){
@@ -41,8 +62,21 @@ class Game{
             }
         }
     }
-    resetGame(startingPlayer){
+    resetGame(){
         this.gameBoard = ["","","","","","","","",""]
-        this.turn = startingPlayer
+        if(this.startingPlayer === "player1"){
+            this.startingPlayer = "player2"
+        } else {
+            this.startingPlayer = "player1"
+        }
+        this.turn = this.startingPlayer
+
+    }
+    changeTurn(){
+        if(this.turn === "player1"){
+            this.turn = "player2"
+        } else {
+            this.turn = "player1"
+        } 
     }
 }
