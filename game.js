@@ -5,6 +5,8 @@ class Game{
         this.gameBoard = ["","","","","","","","",""]
         this.turn = "player1"
         this.startingPlayer = "player1"
+        this.gameState = "continue"
+        this.winner = ""
     }
     checkForWin(){
         if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[1] === this[this.turn].token && this.gameBoard[2] === this[this.turn].token ||
@@ -16,23 +18,18 @@ class Game{
             this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
             this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
                 this[this.turn].increaseWins()
-                
-                banner.innerText = `${this[this.turn].token} has won!`
-                this.resetGame()
-                return
+                this.winner = this[this.turn].token
+                this.gameState = "winner"
         }
-        this.checkForDraw()
     }
     checkForDraw(){
         for (var i = 0;i<this.gameBoard.length;i++){
             if(this.gameBoard[i] === ""){
-                this.changeTurn()
-                return 
+                return
             }
         }
-        banner.innerText = `Draw`
-        this.resetGame()
-        return
+        this.gameState = "draw"
+
     }
     resetGame(){
         this.gameBoard = ["","","","","","","","",""]
@@ -42,6 +39,7 @@ class Game{
             this.startingPlayer = "player1"
         }
         this.turn = this.startingPlayer
+        this.gameState = "continue"
         updateGrid()
     }
     changeTurn(){
@@ -49,12 +47,12 @@ class Game{
             this.turn = "player2"
         } else {
             this.turn = "player1"
-        } 
+        }
         return
     }
     checkBoardAvailability(){
         var position = Number(event.target.id[4])
-        if (this.gameBoard[position] === ""){
+        if (this.gameBoard[position] === "" && this.gameState === "continue"){
             this.gameBoard[position] = this[this.turn].token
             return true
         }
