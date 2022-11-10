@@ -16,23 +16,23 @@ class Game{
             this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
             this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
                 this[this.turn].increaseWins()
+                
                 banner.innerText = `${this[this.turn].token} has won!`
                 this.resetGame()
+                return
         }
         this.checkForDraw()
     }
     checkForDraw(){
-        console.log(this.gameBoard[Number(event.target.id[4])])
         for (var i = 0;i<this.gameBoard.length;i++){
             if(this.gameBoard[i] === ""){
-                console.log(this.gameBoard[i])
                 this.changeTurn()
                 return 
             }
         }
         banner.innerText = `Draw`
         this.resetGame()
-        return true
+        return
     }
     resetGame(){
         this.gameBoard = ["","","","","","","","",""]
@@ -45,20 +45,19 @@ class Game{
         updateGrid()
     }
     changeTurn(){
-        console.log("change turn being run")
         if(this.turn === "player1"){
             this.turn = "player2"
         } else {
             this.turn = "player1"
         } 
+        return
     }
     checkBoardAvailability(){
         var position = Number(event.target.id[4])
-        if (event.target.innerText === ""){
+        if (this.gameBoard[position] === ""){
             this.gameBoard[position] = this[this.turn].token
             return true
-        } else{
-            return false
         }
+        return false
     }
 }
