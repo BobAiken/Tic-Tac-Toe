@@ -16,6 +16,7 @@ class Game{
             this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
             this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
                 this[this.turn].increaseWins()
+                
                 banner.innerText = `${this[this.turn].token} has won!`
                 this.resetGame()
                 return
@@ -53,7 +54,7 @@ class Game{
     }
     checkBoardAvailability(){
         var position = Number(event.target.id[4])
-        if (event.target.innerText === ""){
+        if (this.gameBoard[position] === ""){
             this.gameBoard[position] = this[this.turn].token
             return true
         }
