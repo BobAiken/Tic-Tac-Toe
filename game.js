@@ -8,57 +8,26 @@ class Game{
     }
     checkForWin(){
         if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[1] === this[this.turn].token && this.gameBoard[2] === this[this.turn].token ||
-             this.gameBoard[3] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token ||
-              this.gameBoard[6] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
-               this.gameBoard[0] === this[this.turn].token && this.gameBoard[3] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
-                this.gameBoard[1] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token ||
-                 this.gameBoard[2] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
-                  this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
-                   this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
-            this[this.turn].increaseWins()
-            banner.innerText = `${this[this.turn].token} has won!`
-            return true
+            this.gameBoard[3] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token ||
+            this.gameBoard[6] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
+            this.gameBoard[0] === this[this.turn].token && this.gameBoard[3] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
+            this.gameBoard[1] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token ||
+            this.gameBoard[2] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
+            this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
+            this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
+                this[this.turn].increaseWins()
+                banner.innerText = `${this[this.turn].token} has won!`
+                this.resetGame()
         }
-        // if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[1] === this[this.turn].token && this.gameBoard[2] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // } else if (this.gameBoard[3] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // } else if (this.gameBoard[6] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // } else if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[3] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // } else if (this.gameBoard[1] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // } else if (this.gameBoard[2] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // } else if (this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // } else if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token){
-        //     this[this.turn].increaseWins()
-        //     banner.innerText = `${this[this.turn].token} has won!`
-        //     return true
-        // }
+        this.checkForDraw()
     }
     checkForDraw(){
         for (var i = 0;i<this.gameBoard.length;i++){
             if(this.gameBoard[i] === ""){
-                //do nothing because there are still empty spaces
+                this.changeTurn()
             } else {
                 //change banner.innerText to declare a draw
+                return true
             }
         }
     }
@@ -70,7 +39,7 @@ class Game{
             this.startingPlayer = "player1"
         }
         this.turn = this.startingPlayer
-
+        updateGrid()
     }
     changeTurn(){
         if(this.turn === "player1"){
@@ -78,5 +47,14 @@ class Game{
         } else {
             this.turn = "player1"
         } 
+    }
+    checkBoardAvailability(){
+        var position = Number(event.target.id[4])
+        if (event.target.innerText === ""){
+            this.gameBoard[position] = this[this.turn].token
+            return true
+        } else{
+            return false
+        }
     }
 }
