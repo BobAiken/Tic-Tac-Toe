@@ -4,45 +4,61 @@ class Game{
         this.player2 = player2
         this.gameBoard = ["","","","","","","","",""]
         this.turn = "player1"
+        this.startingPlayer = "player1"
     }
-    checkForWin(player){
-        if (this.gameBoard[0] === this.player.token && this.gameBoard[1] === this.player.token && this.gameBoard[2] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[3] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[5] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[6] === this.player.token && this.gameBoard[7] === this.player.token && this.gameBoard[8] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[0] === this.player.token && this.gameBoard[3] === this.player.token && this.gameBoard[6] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[1] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[7] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[2] === this.player.token && this.gameBoard[5] === this.player.token && this.gameBoard[8] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[2] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[6] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
-        } else if (this.gameBoard[0] === this.player.token && this.gameBoard[4] === this.player.token && this.gameBoard[8] === this.player.token){
-            this.player.increaseWins()
-            //change banner.innerText to display payer 1 or player 2 has won
+    checkForWin(){
+        if (this.gameBoard[0] === this[this.turn].token && this.gameBoard[1] === this[this.turn].token && this.gameBoard[2] === this[this.turn].token ||
+            this.gameBoard[3] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token ||
+            this.gameBoard[6] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
+            this.gameBoard[0] === this[this.turn].token && this.gameBoard[3] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
+            this.gameBoard[1] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[7] === this[this.turn].token ||
+            this.gameBoard[2] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
+            this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
+            this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
+                this[this.turn].increaseWins()
+                banner.innerText = `${this[this.turn].token} has won!`
+                this.resetGame()
         }
+        this.checkForDraw()
     }
     checkForDraw(){
+        console.log(this.gameBoard[Number(event.target.id[4])])
         for (var i = 0;i<this.gameBoard.length;i++){
             if(this.gameBoard[i] === ""){
-                //do nothing because there are still empty spaces
-            } else {
-                //change banner.innerText to declare a draw
+                console.log(this.gameBoard[i])
+                this.changeTurn()
+                return 
             }
         }
+        banner.innerText = `Draw`
+        this.resetGame()
+        return true
     }
-    resetGame(startingPlayer){
+    resetGame(){
         this.gameBoard = ["","","","","","","","",""]
-        this.turn = startingPlayer
+        if(this.startingPlayer === "player1"){
+            this.startingPlayer = "player2"
+        } else {
+            this.startingPlayer = "player1"
+        }
+        this.turn = this.startingPlayer
+        updateGrid()
+    }
+    changeTurn(){
+        console.log("change turn being run")
+        if(this.turn === "player1"){
+            this.turn = "player2"
+        } else {
+            this.turn = "player1"
+        } 
+    }
+    checkBoardAvailability(){
+        var position = Number(event.target.id[4])
+        if (event.target.innerText === ""){
+            this.gameBoard[position] = this[this.turn].token
+            return true
+        } else{
+            return false
+        }
     }
 }
