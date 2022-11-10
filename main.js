@@ -7,7 +7,7 @@ var grid = document.querySelectorAll(".grid")
 
 
 for (var i = 0; i<grid.length;i++) {
-    grid[i].addEventListener('click',function(){
+    grid[i].addEventListener('click', function(){
         if(game.checkBoardAvailability()){
             updateGrid()
             game.checkForWin()
@@ -17,6 +17,7 @@ for (var i = 0; i<grid.length;i++) {
 
 
 function updateGrid(){
+    console.log("updateGrid")
     for (var i = 0; i<game.gameBoard.length;i++){
         grid[i].innerText = game.gameBoard[i]
     }
