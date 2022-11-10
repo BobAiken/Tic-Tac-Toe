@@ -15,24 +15,20 @@ class Game{
             this.gameBoard[2] === this[this.turn].token && this.gameBoard[5] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token ||
             this.gameBoard[2] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[6] === this[this.turn].token ||
             this.gameBoard[0] === this[this.turn].token && this.gameBoard[4] === this[this.turn].token && this.gameBoard[8] === this[this.turn].token) {
-                console.log("checkForWin, wonner")
                 this[this.turn].increaseWins()
                 banner.innerText = `${this[this.turn].token} has won!`
                 this.resetGame()
                 return
         }
-        console.log("check for win, winn't")
         this.checkForDraw()
     }
     checkForDraw(){
         for (var i = 0;i<this.gameBoard.length;i++){
             if(this.gameBoard[i] === ""){
-                console.log("No draw")
                 this.changeTurn()
                 return 
             }
         }
-        console.log("a draw has occured")
         banner.innerText = `Draw`
         this.resetGame()
         return
@@ -44,13 +40,10 @@ class Game{
         } else {
             this.startingPlayer = "player1"
         }
-        console.log("starting player has been set to",this.startingPlayer)
         this.turn = this.startingPlayer
-        console.log("this.turn has been set to starting player, which is" ,this.turn)
         updateGrid()
     }
     changeTurn(){
-        console.log("the turn has changed")
         if(this.turn === "player1"){
             this.turn = "player2"
         } else {
@@ -59,7 +52,6 @@ class Game{
         return
     }
     checkBoardAvailability(){
-        console.log("the board is being checked")
         var position = Number(event.target.id[4])
         if (event.target.innerText === ""){
             this.gameBoard[position] = this[this.turn].token
