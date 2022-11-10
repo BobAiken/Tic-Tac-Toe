@@ -16,9 +16,6 @@ for (var i = 0; i<grid.length;i++) {
 }
 
 
-
-
-
 function updateGrid(){
     for (var i = 0; i<game.gameBoard.length;i++){
         grid[i].innerText = game.gameBoard[i]
@@ -26,5 +23,9 @@ function updateGrid(){
 }
 
 function updateWins(){
-    
+
+}
+
+function updateBanner(){
+    banner.innerText
 }

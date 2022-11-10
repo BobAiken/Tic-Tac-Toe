@@ -22,14 +22,17 @@ class Game{
         this.checkForDraw()
     }
     checkForDraw(){
+        console.log(this.gameBoard[Number(event.target.id[4])])
         for (var i = 0;i<this.gameBoard.length;i++){
             if(this.gameBoard[i] === ""){
+                console.log(this.gameBoard[i])
                 this.changeTurn()
-            } else {
-                //change banner.innerText to declare a draw
-                return true
+                return 
             }
         }
+        banner.innerText = `Draw`
+        this.resetGame()
+        return true
     }
     resetGame(){
         this.gameBoard = ["","","","","","","","",""]
@@ -42,6 +45,7 @@ class Game{
         updateGrid()
     }
     changeTurn(){
+        console.log("change turn being run")
         if(this.turn === "player1"){
             this.turn = "player2"
         } else {
