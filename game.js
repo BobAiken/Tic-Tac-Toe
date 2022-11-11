@@ -24,12 +24,11 @@ class Game{
     }
     checkForDraw(){
         for (var i = 0;i<this.gameBoard.length;i++){
-            if(this.gameBoard[i] === ""){
+            if(this.gameBoard[i] === "" || this.gameState === "winner"){
                 return
             }
         }
         this.gameState = "draw"
-
     }
     resetGame(){
         this.gameBoard = ["","","","","","","","",""]
@@ -39,8 +38,6 @@ class Game{
             this.startingPlayer = "player1"
         }
         this.turn = this.startingPlayer
-        this.gameState = "continue"
-        updateGrid()
     }
     changeTurn(){
         if(this.turn === "player1"){

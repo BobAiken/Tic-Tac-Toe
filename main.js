@@ -8,10 +8,12 @@ var player1Wins = document.querySelector(".player1-wins")
 var player2Wins = document.querySelector(".player2-wins")
 
 window.addEventListener('load', function(){
+    if(localStorage.length !== 0){
+        retrieveWins()
+    }
     updateWins()
     updateBanner(game.gameState)
 })
-
 
 for (var i = 0; i<grid.length;i++) {
     grid[i].addEventListener('click', function(){
@@ -22,20 +24,29 @@ for (var i = 0; i<grid.length;i++) {
             game.changeTurn()
             updateBanner(game.gameState)
             updateWins()
+            storeWins()
         }
-        if(game.gameState !== "continue"){
-            var myTimeout = setTimeout(function(){
+        if(game.gameState !== "continue" && game.gameState !== "waiting"){
+            game.gameState = "waiting"
+            updateGrid()
+            setTimeout(function(){
                 game.resetGame()
+                game.gameState = "continue"
+                updateGrid()
                 updateBanner(game.gameState)
-            }, 5000);
+            }, 2000);
         }
     })
 }
 
-
 function updateGrid(){
     for (var i = 0; i<game.gameBoard.length;i++){
         grid[i].innerText = game.gameBoard[i]
+        if (grid[i].innerText !== "" || game.gameState === "waiting"){
+            grid[i].classList.add("no-hover")
+        } else {
+            grid[i].classList.remove("no-hover")
+        }
     }
 }
 
@@ -46,7 +57,7 @@ function updateWins(){
 
 function updateBanner(gameState){
     if(gameState === "continue"){
-        bannerText.innerText = `It is ${game[game.turn].token}'s turn!`
+        bannerText.innerText = `It's ${game[game.turn].token}'s turn!`
     } else if(gameState === "draw"){
         bannerText.innerText = `It's a draw!`
     } else {
@@ -54,5 +65,12 @@ function updateBanner(gameState){
     }
 }
 
+function storeWins() {
+    localStorage.setItem('player1Wins', game.player1.wins)
+    localStorage.setItem('player2Wins', game.player2.wins)
+  }
 
-
+function retrieveWins(){
+    game.player1.wins = localStorage.getItem('player1Wins')
+    game.player2.wins = localStorage.getItem('player2Wins')
+}
