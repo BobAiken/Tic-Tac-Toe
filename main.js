@@ -54,6 +54,3 @@ function updateBanner(gameState){
         bannerText.innerText = `${game.winner} won!`  
     }
 }
-
-
-
