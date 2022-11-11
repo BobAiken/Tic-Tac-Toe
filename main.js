@@ -8,6 +8,9 @@ var player1Wins = document.querySelector(".player1-wins")
 var player2Wins = document.querySelector(".player2-wins")
 
 window.addEventListener('load', function(){
+    if(localStorage.length !== 0){
+        retrieveWins()
+    }
     updateWins()
     updateBanner(game.gameState)
 })
@@ -21,6 +24,7 @@ for (var i = 0; i<grid.length;i++) {
             game.changeTurn()
             updateBanner(game.gameState)
             updateWins()
+            storeWins()
         }
         if(game.gameState !== "continue" && game.gameState !== "waiting"){
             game.gameState = "waiting"
@@ -53,4 +57,14 @@ function updateBanner(gameState){
     } else {
         bannerText.innerText = `${game.winner} won!`  
     }
+}
+
+function storeWins() {
+    localStorage.setItem('player1Wins', game.player1.wins)
+    localStorage.setItem('player2Wins', game.player2.wins)
+  }
+
+function retrieveWins(){
+    game.player1.wins = localStorage.getItem('player1Wins')
+    game.player2.wins = localStorage.getItem('player2Wins')
 }
