@@ -28,21 +28,21 @@ for (var i = 0; i<grid.length;i++) {
         }
         if(game.gameState !== "continue" && game.gameState !== "waiting"){
             game.gameState = "waiting"
+            updateGrid()
             setTimeout(function(){
                 game.resetGame()
-                updateGrid()
                 game.gameState = "continue"
+                updateGrid()
                 updateBanner(game.gameState)
             }, 2000);
         }
     })
 }
 
-
 function updateGrid(){
     for (var i = 0; i<game.gameBoard.length;i++){
         grid[i].innerText = game.gameBoard[i]
-        if (grid[i].innerText !== ""){
+        if (grid[i].innerText !== "" || game.gameState === "waiting"){
             grid[i].classList.add("no-hover")
         } else {
             grid[i].classList.remove("no-hover")
@@ -57,7 +57,7 @@ function updateWins(){
 
 function updateBanner(gameState){
     if(gameState === "continue"){
-        bannerText.innerText = `It is ${game[game.turn].token}'s turn!`
+        bannerText.innerText = `It's ${game[game.turn].token}'s turn!`
     } else if(gameState === "draw"){
         bannerText.innerText = `It's a draw!`
     } else {
