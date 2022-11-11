@@ -12,7 +12,6 @@ window.addEventListener('load', function(){
     updateBanner(game.gameState)
 })
 
-
 for (var i = 0; i<grid.length;i++) {
     grid[i].addEventListener('click', function(){
         if(game.checkBoardAvailability()){
@@ -23,15 +22,17 @@ for (var i = 0; i<grid.length;i++) {
             updateBanner(game.gameState)
             updateWins()
         }
-        if(game.gameState !== "continue"){
-            var myTimeout = setTimeout(function(){
+        if(game.gameState !== "continue" && game.gameState !== "waiting"){
+            game.gameState = "waiting"
+            setTimeout(function(){
                 game.resetGame()
+                updateGrid()
+                game.gameState = "continue"
                 updateBanner(game.gameState)
-            }, 5000);
+            }, 2000);
         }
     })
 }
-
 
 function updateGrid(){
     for (var i = 0; i<game.gameBoard.length;i++){
