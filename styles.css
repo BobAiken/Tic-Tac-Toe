@@ -1,6 +1,7 @@
 * {
     margin: 0;
     font-size: 7vw;
+    font-family: 'Sans Comic Sans', sans-serif;
 }
 
 main {
@@ -69,5 +70,13 @@ main {
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+}
+
+.grid:hover {
+    background-color:mediumpurple;
+}
+
+.no-hover {
+    pointer-events: none;
 }
 

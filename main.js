@@ -38,9 +38,15 @@ for (var i = 0; i<grid.length;i++) {
     })
 }
 
+
 function updateGrid(){
     for (var i = 0; i<game.gameBoard.length;i++){
         grid[i].innerText = game.gameBoard[i]
+        if (grid[i].innerText !== ""){
+            grid[i].classList.add("no-hover")
+        } else {
+            grid[i].classList.remove("no-hover")
+        }
     }
 }
 
