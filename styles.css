@@ -84,7 +84,7 @@ main {
 
 .grid:hover {
     background-color:mediumpurple;
-    cursor:pointer
+    cursor:pointer;
 }
 
 .no-hover {

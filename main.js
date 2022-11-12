@@ -1,6 +1,7 @@
 var player1 = new Player(1,"🐶")
 var player2 = new Player(2,"🐱")
 var game = new Game(player1,player2)
+var placeSound = new Audio("./assets/jump_01.wav")
 
 var bannerText = document.querySelector(".banner-text")
 var grid = document.querySelectorAll(".grid")
@@ -25,6 +26,7 @@ for (var i = 0; i<grid.length;i++) {
             updateBanner(game.gameState)
             updateWins()
             storeWins()
+            placeSound.play()
         }
         if(game.gameState !== "continue" && game.gameState !== "waiting"){
             game.gameState = "waiting"

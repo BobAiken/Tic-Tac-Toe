@@ -2,7 +2,9 @@ class Game{
     constructor(player1,player2){
         this.player1 = player1
         this.player2 = player2
-        this.gameBoard = ["","","","","","","","",""]
+        this.gameBoard = ["","","",
+                        "","","",
+                        "","",""]
         this.turn = "player1"
         this.startingPlayer = "player1"
         this.gameState = "continue"
